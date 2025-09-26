@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Request Improvement - CI Department</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('orangeeji.png');
+            /* Mengubah properti agar gambar menutupi seluruh layar tanpa sisa ruang */
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Menambahkan overlay transparan di atas background untuk meningkatkan kontras teks utama */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); 
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 60px 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 5px solid #007bff;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 5px;
+            animation: fadeInDown 1s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        p.subtitle {
+            font-size: 1.2em;
+            color: #f0f0f0;
+            margin-top: 0;
+            animation: fadeInUp 1s ease-in-out 0.3s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        .logo-container {
+            margin-top: 20px;
+            margin-bottom: 40px;
+            animation: zoomIn 1s ease-in-out 0.6s;
+        }
+        
+        .logo-container img {
+            width: 120px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Style untuk gambar engineer berinovasi */
+        .engineer-innovation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('engineer-inovasi.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            opacity: 0.2;
+            z-index: -2;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .counter-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            animation: fadeInUp 1s ease-in-out 0.6s;
+        }
+        
+        .counter-box h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 0 0 10px 0;
+        }
+        
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .menu a {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-decoration: none;
+            padding: 25px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu a:hover {
+            background-color: #e9ecef;
+            border-color: #007bff;
+            transform: translateY(-5px);
+        }
+
+        .menu a:active {
+            transform: translateY(1px);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="engineer-innovation"></div>
+<div class="container">
+    <div class="logo-container">
+        <img src="logoeji.png" alt="Logo CI Department">
+    </div>
+    
+    <h1>CI Department</h1>
+    <p class="subtitle">Pusat inovasi dan perbaikan berkelanjutan.</p>
+    <p class="subtitle">EJI TO THE MOON.</p>
+
+    <div class="counter-container">
+        <div class="counter-box">
+            <h2>Request CI</h2>
+            <div id="request_ci" class="counter-number">0</div>
+        </div>
+        <div class="counter-box">
+            <h2>Proses Pengerjaan</h2>
+            <div id="proses_pengerjaan" class="counter-number">0</div>
+        </div>
+        <div class="counter-box">
+            <h2>Selesai Dikerjakan</h2>
+            <div id="selesai_dikerjakan" class="counter-number">0</div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <a href="cara-pengajuan.html">💡 Tata Cara Pengajuan</a>
+        <a href="form-pengajuan.html">📝 Ajukan Request Improvement</a>
+        <a href="daftar-antrian.html">🚀 Daftar Antrian Improvement</a>
+    </div>
+</div>
+
+<script>
+    function animateCounter(elementId, targetNumber) {
+        const element = document.getElementById(elementId);
+        let currentNumber = 0;
+        const duration = 1500;
+        const step = targetNumber / (duration / 10);
+
+        const timer = setInterval(() => {
+            currentNumber += step;
+            if (currentNumber >= targetNumber) {
+                currentNumber = targetNumber;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(currentNumber);
+        }, 10);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let improvements = JSON.parse(localStorage.getItem('improvementRequests')) || [];
+        const totalRequests = improvements.length;
+        const inProgressRequests = improvements.filter(item => item.status === 'proses').length;
+        const completedRequests = improvements.filter(item => item.status === 'selesai').length;
+
+        animateCounter('request_ci', totalRequests);
+        animateCounter('proses_pengerjaan', inProgressRequests);
+        animateCounter('selesai_dikerjakan', completedRequests);
+    });
+</script>
+
+</body>
+</html>
